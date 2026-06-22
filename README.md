@@ -28,7 +28,7 @@
         }
         h1 { margin: 0; font-size: 2.5rem; letter-spacing: -0.5px; }
         
-        /* New Top Leaderboard Styling */
+        /* Leaderboard Table Styling */
         .leaderboard-card {
             background: white;
             padding: 24px;
@@ -95,6 +95,26 @@
         .steady { background-color: #e2fbf0; color: #15803d; }
         .cold { background-color: #e0f2fe; color: #0369a1; }
         
+        /* Chaos Table Styles */
+        .table-responsive {
+            overflow-x: auto;
+        }
+        table.chaos-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        table.chaos-table th, table.chaos-table td {
+            text-align: left;
+            padding: 12px 10px;
+            border-bottom: 1px solid #e5e7eb;
+            font-size: 0.95rem;
+        }
+        table.chaos-table th { background-color: #f8fafc; color: #475569; font-weight: 600; }
+        .high-risk { color: #dc2626; font-weight: bold; }
+        .mod-risk { color: #d97706; font-weight: bold; }
+        .low-risk { color: #16a34a; font-weight: bold; }
+
         .help-text { font-size: 0.85rem; color: #64748b; margin-top: -5px; margin-bottom: 15px; }
     </style>
 </head>
@@ -151,30 +171,70 @@
         </div>
 
         <div class="card">
-            <h2>🔥 2. The Form Guide (Last 48h Velocity)</h2>
-            <p class="help-text">Net points gained over the weekend round.</p>
+            <h2>🔥 2. The Form Guide (Last 48h Performance)</h2>
+            <p class="help-text">Sorted dynamically by net weekend points output.</p>
             <div class="scrollable-list">
+                <div class="player-row" style="background-color: #fffbeb;"><span>Elena Portello</span><span class="badge hot">🔥 Weekend Apex (+38 pts)</span></div>
                 <div class="player-row"><span>Johanna Wespe</span><span class="badge hot">🔥 Masterclass (+37 pts)</span></div>
                 <div class="player-row"><span>Benoit de Saint Exupéry</span><span class="badge hot">🔥 Masterclass (+33 pts)</span></div>
                 <div class="player-row"><span>Philippe Calac</span><span class="badge hot">🔥 Masterclass (+33 pts)</span></div>
                 <div class="player-row"><span>Paul Domejean</span><span class="badge surging">⚡ Surging (+30 pts)</span></div>
                 <div class="player-row"><span>Benoit Lombard</span><span class="badge surging">⚡ Surging (+27 pts)</span></div>
                 <div class="player-row"><span>Guillaume Odemer</span><span class="badge surging">⚡ Surging (+26 pts)</span></div>
+                <div class="player-row"><span>Pierre Peigney</span><span class="badge surging">⚡ Surging (+22 pts)</span></div>
+                <div class="player-row"><span>Perrine Guillo</span><span class="badge surging">⚡ Surging (+21 pts)</span></div>
                 <div class="player-row"><span>Adrian Kitcher</span><span class="badge surging">⚡ Surging (+21 pts)</span></div>
                 <div class="player-row"><span>Frederic Mazel</span><span class="badge surging">⚡ Surging (+20 pts)</span></div>
-                <div class="player-row"><span>Perrine Guillo</span><span class="badge steady">🛡️ Steady (+21 pts)</span></div>
+                <div class="player-row"><span>Paul MEIJERS</span><span class="badge steady">🛡️ Steady (+20 pts)</span></div>
+                <div class="player-row"><span>Frederic Saudejaud</span><span class="badge steady">🛡️ Steady (+20 pts)</span></div>
+                <div class="player-row"><span>Maylis Bru</span><span class="badge steady">🛡️ Steady (+17 pts)</span></div>
+                <div class="player-row"><span>Nathalie Doliveira</span><span class="badge steady">🛡️ Steady (+16 pts)</span></div>
                 <div class="player-row"><span>Nicolas Barrault</span><span class="badge steady">🛡️ Steady (+15 pts)</span></div>
                 <div class="player-row"><span>Julien Le Tanno</span><span class="badge steady">🛡️ Steady (+14 pts)</span></div>
-                <div class="player-row"><span>Nathalie Doliveira</span><span class="badge steady">🛡️ Steady (+16 pts)</span></div>
-                <div class="player-row"><span>Maylis Bru</span><span class="badge steady">🛡️ Steady (+17 pts)</span></div>
-                <div class="player-row"><span>Pierre Peigney</span><span class="badge steady">🛡️ Steady (+22 pts)</span></div>
-                <div class="player-row"><span>Elena Portello</span><span class="badge steady">🛡️ Steady (+38 pts)</span></div>
-                <div class="player-row"><span>Paul MEIJERS</span><span class="badge cold">🧊 Cool (+20 pts)</span></div>
-                <div class="player-row"><span>Frederic Saudejaud</span><span class="badge cold">🧊 Cool (+20 pts)</span></div>
                 <div class="player-row"><span>Valerie Itie-Polese</span><span class="badge cold">🧊 Cool (+11 pts)</span></div>
                 <div class="player-row"><span>Maud Rotureau</span><span class="badge cold">🧊 Cool (+9 pts)</span></div>
                 <div class="player-row"><span>Patrick Lombard</span><span class="badge cold">🧊 Cool (+5 pts)</span></div>
             </div>
+        </div>
+    </div>
+
+    <div class="card" style="margin-top: 20px;">
+        <h2>🎲 3. The Chaos Index (Strategic Risk vs. Reward Profiles)</h2>
+        <p class="help-text">Measures playstyle risk level based on standard outcome distributions vs speculative deviations.</p>
+        <div class="table-responsive">
+            <table class="chaos-table">
+                <thead>
+                    <tr>
+                        <th>Pos</th>
+                        <th>Player Name</th>
+                        <th>Live Score</th>
+                        <th>Prediction Profile Archetype</th>
+                        <th>Risk Level</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>1</td><td>Johanna Wespe</td><td>91 pts</td><td>🛡️ Defensive Wall (Unshakeable consistency on tight wins)</td><td><span class="low-risk">Safe Base</span></td></tr>
+                    <tr><td>2</td><td>Benoit de Saint Exupéry</td><td>84 pts</td><td>💥 Heavy Gunner (Keeps hunting large-margin blowouts)</td><td><span class="high-risk">High Risk</span></td></tr>
+                    <tr><td>3</td><td>Philippe Calac</td><td>76 pts</td><td>🛡️ Controlled Margin Anchor (Strong tactical base)</td><td><span class="low-risk">Safe Base</span></td></tr>
+                    <tr><td>3</td><td>Benoit Lombard</td><td>76 pts</td><td>⚖️ Balanced Geometrician (Perfect mirror of group averages)</td><td><span class="mod-risk">Moderate</span></td></tr>
+                    <tr><td>5</td><td>Paul Domejean</td><td>67 pts</td><td>🎲 Aggressive Match Upset Hunter</td><td><span class="high-risk">High Risk</span></td></tr>
+                    <tr><td>6</td><td>Frederic Mazel</td><td>64 pts</td><td>🤝 Tactical Draw Specialist</td><td><span class="mod-risk">Moderate</span></td></tr>
+                    <tr><td>7</td><td>Elena Portello</td><td>61 pts</td><td>⚡ Volatility Rocket (Blew past the midfield this weekend!)</td><td><span class="high-risk">High Risk</span></td></tr>
+                    <tr><td>8</td><td>Guillaume Odemer</td><td>57 pts</td><td>⚡ Momentum Swinger</td><td><span class="mod-risk">Moderate</span></td></tr>
+                    <tr><td>9</td><td>Adrian Kitcher</td><td>54 pts</td><td>🎲 Speculative Scoreline Backer</td><td><span class="high-risk">High Risk</span></td></tr>
+                    <tr><td>10</td><td>Julien Le Tanno</td><td>53 pts</td><td>⚖️ Middle-ground Predictor</td><td><span class="mod-risk">Moderate</span></td></tr>
+                    <tr><td>11</td><td>Nathalie Doliveira</td><td>52 pts</td><td>🛡️ Solid Strategy Conservator</td><td><span class="low-risk">Safe Base</span></td></tr>
+                    <tr><td>11</td><td>Perrine Guillo</td><td>52 pts</td><td>🛡️ Conservative Base Safeguard</td><td><span class="low-risk">Safe Base</span></td></tr>
+                    <tr><td>13</td><td>Pierre Peigney</td><td>49 pts</td><td>🤝 Split-points Draw Trapper</td><td><span class="mod-risk">Moderate</span></td></tr>
+                    <tr><td>14</td><td>Maylis Bru</td><td>46 pts</td><td>🛡️ Low-scoring Outcome Specialist</td><td><span class="low-risk">Safe Base</span></td></tr>
+                    <tr><td>15</td><td>Nicolas Barrault</td><td>44 pts</td><td>⚖️ Traditional Goal Standard Selector</td><td><span class="mod-risk">Moderate</span></td></tr>
+                    <tr><td>16</td><td>Paul MEIJERS</td><td>42 pts</td><td>⚖️ Default Metric Scaler</td><td><span class="mod-risk">Moderate</span></td></tr>
+                    <tr><td>17</td><td>Patrick Lombard</td><td>40 pts</td><td>🔥 Total Chaos Maverick (Cooling down after a wild run)</td><td><span class="high-risk">Maximum Risk</span></td></tr>
+                    <tr><td>18</td><td>Frederic Saudejaud</td><td>38 pts</td><td>🛡️ Grounded Baseline Anchor</td><td><span class="low-risk">Safe Base</span></td></tr>
+                    <tr><td>19</td><td>Valerie Itie-Polese</td><td>28 pts</td><td>⚖️ Moderate Standard Predictor</td><td><span class="mod-risk">Moderate</span></td></tr>
+                    <tr><td>20</td><td>Maud Rotureau</td><td>18 pts</td><td>🎲 Extreme Upset Sniper</td><td><span class="high-risk">High Risk</span></td></tr>
+                </tbody>
+            </table>
         </div>
     </div>
 </div>
