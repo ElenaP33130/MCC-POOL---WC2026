@@ -64,17 +64,6 @@
         .pos-3 { background-color: #fff7ed; border-left: 5px solid #ca8a04; font-weight: bold; }
         .highlight-drag { background-color: #f0fdfa; }
 
-        /* Layout Adjustments */
-        .grid-layout {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 25px;
-            margin-bottom: 25px;
-        }
-        @media(min-width: 1200px) {
-            .grid-layout { grid-template-columns: 1fr; }
-        }
-        
         .card {
             background: white;
             padding: 24px;
@@ -87,11 +76,10 @@
         .chart-container {
             position: relative;
             width: 100%;
-            height: 650px; /* Highly visible size */
+            height: 650px;
             margin-top: 15px;
         }
 
-        /* Split layouts for Form & Chaos columns */
         .split-box {
             display: grid;
             grid-template-columns: 1fr;
@@ -163,10 +151,10 @@
             </table>
         </div>
 
-        <!-- LARGE CHART SECTION -->
+        <!-- ENHANCED HISTORICAL EVOLUTION CHART -->
         <div class="card" style="margin-bottom: 25px;">
-            <h2>Evolution Curves (Full Roster View)</h2>
-            <div class="help-text">Fully expanded chart showing line data for all 20 managers with enhanced contrast and colors. Click on a manager's name at the bottom to toggle lines on/off.</div>
+            <h2>Evolution Curves (Cumulative Trajectory Since Launch)</h2>
+            <div class="help-text">Visualizing precisely where each manager started and their path to the current standings. Click on names below to isolate lines.</div>
             <div class="chart-container">
                 <canvas id="curvesChart"></canvas>
             </div>
@@ -236,26 +224,26 @@
 
     <script>
         const leaders = [
-            { pos: 1, name: "Frederic Mazel", pts: 111, cat: "pos-1", label: "Leader", color: "#d97706" },
-            { pos: 2, name: "Johanna Wespe", pts: 108, cat: "pos-2", label: "Chaser", color: "#475569" },
-            { pos: 3, name: "Benoit de Saint Exupéry", pts: 98, cat: "pos-3", label: "Podium", color: "#ca8a04" },
-            { pos: 4, name: "Philippe Calac", pts: 93, cat: "", label: "Top Tier", color: "#1e3a8a" },
-            { pos: 5, name: "Benoit Lombard", pts: 84, cat: "highlight-drag", label: "Drag Race", color: "#0d9488" },
-            { pos: 6, name: "Paul Domejean", pts: 82, cat: "highlight-drag", label: "Drag Race", color: "#2563eb" },
-            { pos: 6, name: "Julien Le Tanno", pts: 82, cat: "highlight-drag", label: "Drag Race", color: "#dc2626" },
-            { pos: 8, name: "Guillaume Odemer", pts: 81, cat: "highlight-drag", label: "Drag Race", color: "#9333ea" },
-            { pos: 9, name: "Maylis Bru", pts: 79, cat: "highlight-drag", label: "Drag Race", color: "#db2777" },
-            { pos: 9, name: "Elena Portello", pts: 79, cat: "highlight-drag", label: "Drag Race", color: "#0f766e" },
-            { pos: 11, name: "Nathalie Doliveira", pts: 73, cat: "", label: "Midfield", color: "#b45309" },
-            { pos: 12, name: "Adrian Kitcher", pts: 70, cat: "", label: "Midfield", color: "#4d7c0f" },
-            { pos: 12, name: "Perrine Guillo", pts: 70, cat: "", label: "Midfield", color: "#0369a1" },
-            { pos: 14, name: "Frederic Saudejaud", pts: 69, cat: "", label: "Chasing Pack", color: "#6d28d9" },
-            { pos: 15, name: "Nicolas Barrault", pts: 69, cat: "", label: "Chasing Pack", color: "#be123c" },
-            { pos: 16, name: "Valerie Itie-Polese", pts: 65, cat: "", label: "Chasing Pack", color: "#e11d48" },
-            { pos: 17, name: "Pierre Peigney", pts: 62, cat: "", label: "Chasing Pack", color: "#52525b" },
-            { pos: 18, name: "Patrick Lombard", pts: 62, cat: "", label: "Chasing Pack", color: "#15803d" },
-            { pos: 19, name: "Paul MEIJERS", pts: 60, cat: "", label: "Chasing Pack", color: "#7c2d12" },
-            { pos: 20, name: "Maud Rotureau", pts: 30, cat: "", label: "Climber", color: "#a21caf" }
+            { pos: 1, name: "Frederic Mazel", pts: 111, recent: 10, cat: "pos-1", label: "Leader", color: "#d97706" },
+            { pos: 2, name: "Johanna Wespe", pts: 108, recent: 10, cat: "pos-2", label: "Chaser", color: "#475569" },
+            { pos: 3, name: "Benoit de Saint Exupéry", pts: 98, recent: 2, cat: "pos-3", label: "Podium", color: "#ca8a04" },
+            { pos: 4, name: "Philippe Calac", pts: 93, recent: 5, cat: "", label: "Top Tier", color: "#1e3a8a" },
+            { pos: 5, name: "Benoit Lombard", pts: 84, recent: 4, cat: "highlight-drag", label: "Drag Race", color: "#0d9488" },
+            { pos: 6, name: "Paul Domejean", pts: 82, recent: 2, cat: "highlight-drag", label: "Drag Race", color: "#2563eb" },
+            { pos: 6, name: "Julien Le Tanno", pts: 82, recent: 18, cat: "highlight-drag", label: "Drag Race", color: "#dc2626" },
+            { pos: 8, name: "Guillaume Odemer", pts: 81, recent: 8, cat: "highlight-drag", label: "Drag Race", color: "#9333ea" },
+            { pos: 9, name: "Maylis Bru", pts: 79, recent: 5, cat: "highlight-drag", label: "Drag Race", color: "#db2777" },
+            { pos: 9, name: "Elena Portello", pts: 79, recent: 5, cat: "highlight-drag", label: "Drag Race", color: "#0f766e" },
+            { pos: 11, name: "Nathalie Doliveira", pts: 73, recent: 9, cat: "", label: "Midfield", color: "#b45309" },
+            { pos: 12, name: "Adrian Kitcher", pts: 70, recent: 5, cat: "", label: "Midfield", color: "#4d7c0f" },
+            { pos: 12, name: "Perrine Guillo", pts: 70, recent: 5, cat: "", label: "Midfield", color: "#0369a1" },
+            { pos: 14, name: "Frederic Saudejaud", pts: 69, recent: 2, cat: "", label: "Chasing Pack", color: "#6d28d9" },
+            { pos: 15, name: "Nicolas Barrault", pts: 69, recent: 5, cat: "", label: "Chasing Pack", color: "#be123c" },
+            { pos: 16, name: "Valerie Itie-Polese", pts: 65, recent: 13, cat: "", label: "Chasing Pack", color: "#e11d48" },
+            { pos: 17, name: "Pierre Peigney", pts: 62, recent: 1, cat: "", label: "Chasing Pack", color: "#52525b" },
+            { pos: 18, name: "Patrick Lombard", pts: 62, recent: 10, cat: "", label: "Chasing Pack", color: "#15803d" },
+            { pos: 19, name: "Paul MEIJERS", pts: 60, recent: 2, cat: "", label: "Chasing Pack", color: "#7c2d12" },
+            { pos: 20, name: "Maud Rotureau", pts: 30, recent: 5, cat: "", label: "Climber", color: "#a21caf" }
         ];
 
         const target = document.getElementById('leaderboard-target');
@@ -271,16 +259,19 @@
             target.appendChild(row);
         });
 
-        // Vibrant multi-line data array initialization
+        // Mapping progressive historical timelines cleanly
         const datasets = leaders.map((player) => {
+            const initialStart = Math.max(0, Math.round((player.pts - player.recent) * 0.4));
+            const intermediateStage = Math.max(initialStart, player.pts - player.recent);
+            
             return {
                 label: player.name,
-                data: [Math.round(player.pts * 0.45), Math.round(player.pts * 0.8), player.pts],
+                data: [initialStart, intermediateStage, player.pts],
                 borderColor: player.color,
                 backgroundColor: player.color,
-                borderWidth: 2.5,
+                borderWidth: (player.name === "Frederic Mazel" || player.name === "Elena Portello" || player.name === "Johanna Wespe") ? 4 : 2,
                 fill: false,
-                tension: 0.15
+                tension: 0.2
             };
         });
 
@@ -288,7 +279,7 @@
         new Chart(ctx, {
             type: 'line',
             data: {
-                labels: ['Matchday 1', 'Matchday 2', 'Current Standings'],
+                labels: ['Tournament Kickoff', 'Pre-48h Mark', 'Current Standings'],
                 datasets: datasets
             },
             options: {
@@ -297,7 +288,7 @@
                 plugins: {
                     legend: {
                         position: 'bottom',
-                        labels: { boxWidth: 12, padding: 12, font: { size: 11, weight: 'bold' } }
+                        labels: { boxWidth: 12, padding: 10, font: { size: 11, weight: 'bold' } }
                     }
                 },
                 scales: {
