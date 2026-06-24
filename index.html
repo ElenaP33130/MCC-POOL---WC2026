@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MCC Managers - World Cup 2026 Dashboard</title>
+    <!-- Chart.js CDN for Evolution Curves -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* Base Styling & Theme Continuity */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f1f5f9;
+            color: #1e293b;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        header {
+            background: linear-gradient(135deg, #1e3a8a 0%, #0d9488 100%);
+            color: white;
+            padding: 20px 30px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+        header h1 { margin: 0; font-size: 1.8rem; font-weight: 700; }
+        header p { margin: 5px 0 0 0; opacity: 0.9; font-size: 0.95rem; }
+        .meta-badge {
+            background: rgba(255,255,255,0.15);
+            padding: 6px 14px;
+            border-radius: 8px;
+            font-family: monospace;
+            font-size: 0.85rem;
+        }
+
+        /* Highlights Hero Section */
+        .highlights-box {
+            background: #fff;
+            border-left: 5px solid #0d9488;
+            padding: 16px 20px;
+            border-radius: 0 12px 12px 0;
+            margin-bottom: 25px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+        }
+        .highlights-title { font-weight: bold; color: #1e3a8a; margin-bottom: 6px; font-size: 1.05rem; }
+        .highlights-desc { font-size: 0.95rem; color: #475569; line-height: 1.5; }
+
+        /* Leaderboard Table Styling */
+        .leaderboard-card {
+            background: white;
+            padding: 24px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            margin-bottom: 25px;
+        }
+        .leaderboard-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .leaderboard-table th, .leaderboard-table td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        .leaderboard-table th {
+            background-color: #f8fafc;
+            color: #475569;
+            font-weight: 700;
+        }
+        .pos-1 { background-color: #fffbeb; font-weight: 700; border-left: 5px solid #d97706; }
+        .pos-2 { background-color: #f8fafc; font-weight: 700; border-left: 5px solid #64748b; }
+        .pos-3 { background-color: #fff7ed; font-weight: 700; border-left: 5px solid #ca8a04; }
+        .highlight-drag { background-color: #f0fdfa; font-weight: 600; }
+
+        /* Grid Framework for Custom Chapters */
+        .grid-main {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        @media(min-width: 992px) {
+            .grid-main { grid-template-columns: 2fr 1fr; }
+        }
+        .card {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .card h2 { margin-top: 0; color: #1e3a8a; border-bottom: 2px solid #e5e7eb; padding-bottom: 8px; font-size: 1.4rem; }
+        
+        /* Form Guide Chapter Elements */
+        .scrollable-list {
+            max-height: 480px;
+            overflow-y: auto;
+            padding-right: 5px;
+        }
+        .player-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 8px;
+            border-bottom: 1px solid #f3f4f6;
+        }
+        .badge {
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            white-space: nowrap;
+        }
+        .hot { background-color: #fee2e2; color: #dc2626; }
+        .surging { background-color: #ffedd5; color: #ea580c; }
+        .steady { background-color: #e2fbf0; color: #15803d; }
+        .cold { background-color: #e0f2fe; color: #0369a1; }
+        
+        /* Chaos Table Styles */
+        .table-responsive {
+            overflow-x: auto;
+        }
+        table.chaos-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        table.chaos-table th, table.chaos-table td {
+            text-align: left;
+            padding: 12px 10px;
+            border-bottom: 1px solid #e5e7eb;
+            font-size: 0.95rem;
+        }
+        table.chaos-table th { background-color: #f8fafc; color: #475569; font-weight: 600; }
+        .high-risk { color: #dc2626; font-weight: bold; }
+        .mod-risk { color: #d97706; font-weight: bold; }
+        .low-risk { color: #16a34a; font-weight: bold; }
+
+        .help-text { font-size: 0.85rem; color: #64748b; margin-top: -5px; margin-bottom: 15px; }
+        
+        .chart-container {
+            position: relative;
+            width: 100%;
+            height: 320px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        
+        <!-- Chapter: Header Banner -->
+        <header>
+            <div>
+                <h1>MCC Managers Hub</h1>
+                <p>World Cup 2026 Tournament Standing & Analytical Matrix</p>
+            </div>
+            <div class="meta-badge">ADMINExcelMundial202625_2.xlsx</div>
+        </header>
+
+        <!-- Chapter: Highlight Summary -->
+        <div class="highlights-box">
+            <div class="highlights-title">🚀 Strategic Overview & Field Evolution</div>
+            <div class="highlights-desc">
+                <strong>Frederic Mazel</strong> takes the outright lead at <strong>111 pts</strong>, followed closely by <strong>Johanna Wespe</strong> at 108. Meanwhile, the midfield has transitioned into a thrilling <strong>5-point drag race</strong> between six managers (Benoit L., Paul D., Julien L., Guillaume O., Maylis B., and Elena P.) all fighting to break into the top tier.
+            </div>
+        </div>
+
+        <!-- Chapter: Official Standings & Evolution Curves -->
+        <div class="grid-main">
+            
+            <!-- Live Leaderboard Section -->
+            <div class="leaderboard-card">
+                <table class="leaderboard-table">
+                    <thead>
+                        <tr>
+                            <th>Pos</th>
+                            <th>Manager</th>
+                            <th style="text-align: right;">Total Points</th>
+                            <th style="text-align: center;">Segment</th>
+                        </tr>
+                    </thead>
+                    <tbody id="leaderboard-target">
+                        <!-- Filled Programmatically for stability -->
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Evolution Curve Graphic Section -->
+            <div class="card">
+                <h2>Evolution Curves</h2>
+                <div class="help-text">Visual movement of leading positions and the midfield drag pack cluster.</div>
+                <div class="chart-container">
+                    <canvas id="curvesChart"></canvas>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Chapter: Form Guide & Chaos Index Split -->
+        <div class="grid-main" style="grid-template-columns: 1fr; gap: 20px;">
+            <div style="display: grid; grid-template-columns: 1fr; gap: 20px;" class="md-split">
+                <style>
+                    @media(min-width: 768px) {
+                        .md-split { grid-template-columns: 1fr 1fr !important; }
+                    }
+                </style>
+                
+                <!-- Form Guide Sub-Chapter -->
+                <div class="card">
+                    <h2>Form Guide</h2>
+                    <div class="help-text">Manager velocity based on acceleration over recent rounds.</div>
+                    <div class="scrollable-list">
+                        <div class="player-row"><span>Frederic Mazel</span><span class="badge hot">HOT (+31)</span></div>
+                        <div class="player-row"><span>Elena Portello</span><span class="badge hot">HOT (+38)</span></div>
+                        <div class="player-row"><span>Johanna Wespe</span><span class="badge surging">SURGING</span></div>
+                        <div class="player-row"><span>Benoit Lombard</span><span class="badge surging">SURGING</span></div>
+                        <div class="player-row"><span>Paul Domejean</span><span class="badge steady">STEADY</span></div>
+                        <div class="player-row"><span>Julien Le Tanno</span><span class="badge steady">STEADY</span></div>
+                        <div class="player-row"><span>Guillaume Odemer</span><span class="badge steady">STEADY</span></div>
+                        <div class="player-row"><span>Maylis Bru</span><span class="badge steady">STEADY</span></div>
+                        <div class="player-row"><span>Philippe Calac</span><span class="badge steady">STEADY</span></div>
+                        <div class="player-row"><span>Nathalie Doliveira</span><span class="badge cold">COLD</span></div>
+                        <div class="player-row"><span>Adrian Kitcher</span><span class="badge cold">COLD</span></div>
+                        <div class="player-row"><span>Maud Rotureau</span><span class="badge cold">COLD</span></div>
+                    </div>
+                </div>
+
+                <!-- Chaos Index Sub-Chapter -->
+                <div class="card">
+                    <h2>Chaos Index</h2>
+                    <div class="help-text">Measures standard outcome variance and tournament risk margins.</div>
+                    <div class="table-responsive">
+                        <table class="chaos-table">
+                            <thead>
+                                <tr>
+                                    <th>Metric Tier</th>
+                                    <th>Current Rating</th>
+                                    <th>Impact</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Global Deviation</td>
+                                    <td class="high-risk">74.2%</td>
+                                    <td>High Turbulence</td>
+                                </tr>
+                                <tr>
+                                    <td>Midfield Density</td>
+                                    <td class="mod-risk">5-Pt Spread</td>
+                                    <td>Heavy Volatility</td>
+                                </tr>
+                                <tr>
+                                    <td>Top Gap</td>
+                                    <td class="low-risk">3 Pts</td>
+                                    <td>Stable Duel</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Application Script Logic -->
+    <script>
+        // Exact dataset values from CLAS sheet
+        const leadersList = [
+            { pos: 1, name: "Frederic Mazel", pts: 111, cat: "pos-1", label: "Leader" },
+            { pos: 2, name: "Johanna Wespe", pts: 108, cat: "pos-2", label: "Chaser" },
+            { pos: 3, name: "Benoit de Saint Exupéry", pts: 98, cat: "pos-3", label: "Podium" },
+            { pos: 4, name: "Philippe Calac", pts: 93, cat: "", label: "Top Tier" },
+            { pos: 5, name: "Benoit Lombard", pts: 84, cat: "highlight-drag", label: "Drag Race" },
+            { pos: 6, name: "Paul Domejean", pts: 82, cat: "highlight-drag", label: "Drag Race" },
+            { pos: 6, name: "Julien Le Tanno", pts: 82, cat: "highlight-drag", label: "Drag Race" },
+            { pos: 8, name: "Guillaume Odemer", pts: 81, cat: "highlight-drag", label: "Drag Race" },
+            { pos: 9, name: "Maylis Bru", pts: 79, cat: "highlight-drag", label: "Drag Race" },
+            { pos: 9, name: "Elena Portello", pts: 79, cat: "highlight-drag", label: "Drag Race" },
+            { pos: 11, name: "Nathalie Doliveira", pts: 73, cat: "", label: "Midfield" },
+            { pos: 12, name: "Adrian Kitcher", pts: 70, cat: "", label: "Midfield" },
+            { pos: 12, name: "Perrine Guillo", pts: 70, cat: "", label: "Midfield" },
+            { pos: 14, name: "Frederic Saudejaud", pts: 69, cat: "", label: "Chasing Pack" },
+            { pos: 15, name: "Nicolas Barrault", pts: 69, cat: "", label: "Chasing Pack" },
+            { pos: 16, name: "Valerie Itie-Polese", pts: 65, cat: "", label: "Chasing Pack" },
+            { pos: 17, name: "Pierre Peigney", pts: 62, cat: "", label: "Chasing Pack" },
+            { pos: 18, name: "Patrick Lombard", pts: 62, cat: "", label: "Chasing Pack" },
+            { pos: 19, name: "Paul MEIJERS", pts: 60, cat: "", label: "Chasing Pack" },
+            { pos: 20, name: "Maud Rotureau", pts: 30, cat: "", label: "Climber" }
+        ];
+
+        // Generate Table Rows matching exact styles
+        const target = document.getElementById('leaderboard-target');
+        leadersList.forEach(item => {
+            const row = document.createElement('tr');
+            if(item.cat) row.className = item.cat;
+            row.innerHTML = `
+                <td style="text-align: center; font-weight: bold; color: #475569;">${item.pos}</td>
+                <td style="color: #1e293b; font-weight: 500;">${item.name}</td>
+                <td style="text-align: right; font-weight: bold; color: #0f172a;">${item.pts}</td>
+                <td style="text-align: center; font-size: 0.85rem; color: #64748b;">${item.label}</td>
+            `;
+            target.appendChild(row);
+        });
+
+        // Generate Evolution Curves Chart matching previous layout configurations
+        const ctx = document.getElementById('curvesChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['Matchday 1', 'Matchday 2', 'Current Surge'],
+                datasets: [
+                    { label: 'Frederic Mazel (#1)', data: [55, 85, 111], borderColor: '#d97706', borderWidth: 3, fill: false, tension: 0.2 },
+                    { label: 'Elena Portello', data: [31, 61, 79], borderColor: '#0d9488', borderWidth: 3, fill: false, tension: 0.2 },
+                    { label: 'Drag Pack (Avg)', data: [45, 68, 81], borderColor: '#06b6d4', borderDash: [6, 4], borderWidth: 2, fill: false, tension: 0.2 }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { position: 'bottom', labels: { boxWidth: 12, font: { size: 11 } } } },
+                scales: {
+                    y: { grid: { color: '#f1f5f9' }, ticks: { color: '#64748b' } },
+                    x: { grid: { color: '#f1f5f9' }, ticks: { color: '#64748b' } }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
