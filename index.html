@@ -29,8 +29,15 @@
             align-items: center;
             box-shadow: 0 4px 6px rgba(0,0,0,0.05);
         }
-        header h1 { margin: 0; font-size: 1.8rem; }
-        header p { margin: 5px 0 0 0; opacity: 0.9; }
+        header h1 { margin: 0; font-size: 1.8rem; font-weight: 700; }
+        header p { margin: 5px 0 0 0; opacity: 0.9; font-size: 0.95rem; }
+        .meta-badge {
+            background: rgba(255,255,255,0.15);
+            padding: 6px 14px;
+            border-radius: 8px;
+            font-family: monospace;
+            font-size: 0.85rem;
+        }
         
         .highlights-box {
             background: #fff;
@@ -41,7 +48,7 @@
             box-shadow: 0 2px 4px rgba(0,0,0,0.02);
         }
 
-        /* Leaderboard Table */
+        /* Leaderboard Table Styles */
         .leaderboard-card {
             background: white;
             padding: 24px;
@@ -69,8 +76,9 @@
             padding: 24px;
             border-radius: 12px;
             box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            margin-bottom: 25px;
         }
-        .card h2 { margin-top: 0; color: #1e3a8a; border-bottom: 2px solid #e5e7eb; padding-bottom: 8px; }
+        .card h2 { margin-top: 0; color: #1e3a8a; border-bottom: 2px solid #e5e7eb; padding-bottom: 8px; font-size: 1.4rem; }
 
         /* Expanded Chart Container */
         .chart-container {
@@ -152,9 +160,9 @@
         </div>
 
         <!-- ENHANCED HISTORICAL EVOLUTION CHART -->
-        <div class="card" style="margin-bottom: 25px;">
-            <h2>Evolution Curves (Cumulative Trajectory Since Launch)</h2>
-            <div class="help-text">Visualizing precisely where each manager started and their path to the current standings. Click on names below to isolate lines.</div>
+        <div class="card">
+            <h2>Evolution Curves (Cumulative Trajectory From 0)</h2>
+            <div class="help-text">Visualizing precisely where each manager started from zero. Click on names in the bottom legend to isolate lines.</div>
             <div class="chart-container">
                 <canvas id="curvesChart"></canvas>
             </div>
@@ -202,7 +210,7 @@
                     <div class="commentary-item"><span class="commentary-name">Philippe Calac:</span> Balanced profile. Positioned optimally to capitalize if upper seeds experience sudden drift.</div>
                     <div class="commentary-item"><span class="commentary-name">Benoit Lombard:</span> Center of the drag race pack. High structural tie-risk with neighboring brackets.</div>
                     <div class="commentary-item"><span class="commentary-name">Paul Domejean:</span> Low momentum variance during this segment, trailing safe parameters.</div>
-                    <div class="commentary-item"><span class="commentary-name">Julien Le Tanno:</span> Maximal Chaos Rating. Explosive surge creates severe risk deviations across the board.</div>
+                    <div class="commentary-item"><span class="commentary-name">Julien Le Tanno:</span> Marginal Chaos Rating. Explosive surge creates severe risk deviations across the board.</div>
                     <div class="commentary-item"><span class="commentary-name">Guillaume Odemer:</span> Safe tracking metrics. Resisting structural drops with steady defensive picks.</div>
                     <div class="commentary-item"><span class="commentary-name">Maylis Bru:</span> Highly vulnerable to immediate differential variance within the 5-point pack.</div>
                     <div class="commentary-item"><span class="commentary-name">Elena Portello:</span> Measured risk matrix. Perfectly poised to utilize upcoming knockouts as leverage points.</div>
@@ -260,20 +268,19 @@
             target.appendChild(row);
         });
 
-        // Map Chronological Progression with accurate overtaking data points
+        // Map Chronological Progression starting from zero cleanly
         const datasets = leaders.map((player) => {
             let pre48hScore = player.pts - player.recent;
             
-            // Adjust specific historical points to show Johanna leading until the latest round
+            // Adjust historical values so Johanna shows leading right up until the latest round
             if (player.name === "Frederic Mazel") {
-                pre48hScore = 95; // Stays slightly below Johanna previously
+                pre48hScore = 95;
             } else if (player.name === "Johanna Wespe") {
-                pre48hScore = 98; // Leading before the 48-hour shift
+                pre48hScore = 98;
             }
 
             return {
                 label: player.name,
-                // Everyone begins absolutely at 0
                 data: [0, pre48hScore, player.pts],
                 borderColor: player.color,
                 backgroundColor: player.color,
