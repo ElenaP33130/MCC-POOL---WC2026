@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MCC Managers - World Cup 2026 Hub</title>
-    <!-- Chart.js CDN -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         body {
@@ -80,7 +79,6 @@
         }
         .card h2 { margin-top: 0; color: #1e3a8a; border-bottom: 2px solid #e5e7eb; padding-bottom: 8px; font-size: 1.4rem; }
 
-        /* Expanded Chart Container */
         .chart-container {
             position: relative;
             width: 100%;
@@ -97,7 +95,6 @@
             .split-box { grid-template-columns: 1fr 1fr; }
         }
 
-        /* Form Guide Rows */
         .player-row {
             display: flex;
             justify-content: space-between;
@@ -116,7 +113,6 @@
         .steady { background-color: #e2fbf0; color: #15803d; }
         .cold { background-color: #e0f2fe; color: #0369a1; }
 
-        /* Commentary Styles */
         .commentary-item {
             padding: 11px 0;
             border-bottom: 1px solid #f1f5f9;
@@ -136,14 +132,13 @@
                 <h1>MCC Managers Hub</h1>
                 <p>World Cup 2026 Tournament Standing & Analytical Matrix</p>
             </div>
-            <div class="meta-badge">ADMINExcelMundial202625_2.xlsx</div>
+            <div class="meta-badge">ADMINExcelMundial202625.xlsx</div>
         </header>
 
         <div class="highlights-box">
-            <strong>🚀 Strategic Overview & Field Evolution:</strong> Frederic Mazel takes the outright lead at 111 pts, followed closely by Johanna Wespe at 108. Meanwhile, the midfield has transitioned into a thrilling 5-point drag race between six managers all fighting to break into the top tier.
+            <strong>🚀 Strategic Overview & Field Evolution:</strong> Frederic Mazel holds onto his lead at 222 pts, but Johanna Wespe is chasing hard at 214 pts after an explosive round. The midfield drag race remains fiercely competitive with points gaps shrinking.
         </div>
 
-        <!-- Leaderboard Table -->
         <div class="leaderboard-card">
             <h2>Official Standings</h2>
             <table class="leaderboard-table">
@@ -159,71 +154,67 @@
             </table>
         </div>
 
-        <!-- ENHANCED HISTORICAL EVOLUTION CHART -->
         <div class="card">
             <h2>Evolution Curves (Cumulative Trajectory From 0)</h2>
-            <div class="help-text">Visualizing precisely where each manager started from zero. Click on names in the bottom legend to isolate lines.</div>
+            <div class="help-text">Visualizing exactly where each manager started from zero. Click on names in the bottom legend to isolate lines.</div>
             <div class="chart-container">
                 <canvas id="curvesChart"></canvas>
             </div>
         </div>
 
-        <!-- Split Views for Form & Chaos -->
         <div class="split-box">
             
-            <!-- FULL 20 PEOPLE FORM GUIDE -->
             <div class="card">
                 <h2>Form Guide (Last 48 Hours)</h2>
                 <div class="help-text">Complete 20-person ranking of immediate points generated over the 48h window.</div>
                 <div>
-                    <div class="player-row"><span>Julien Le Tanno</span><span class="badge hot">HOT (+18)</span></div>
-                    <div class="player-row"><span>Valerie Itie-Polese</span><span class="badge hot">HOT (+13)</span></div>
-                    <div class="player-row"><span>Johanna Wespe</span><span class="badge surging">SURGING (+10)</span></div>
-                    <div class="player-row"><span>Patrick Lombard</span><span class="badge surging">SURGING (+10)</span></div>
-                    <div class="player-row"><span>Frederic Mazel</span><span class="badge surging">SURGING (+10)</span></div>
-                    <div class="player-row"><span>Nathalie Doliveira</span><span class="badge steady">STEADY (+9)</span></div>
-                    <div class="player-row"><span>Guillaume Odemer</span><span class="badge steady">STEADY (+8)</span></div>
-                    <div class="player-row"><span>Elena Portello</span><span class="badge steady">STEADY (+5)</span></div>
-                    <div class="player-row"><span>Maylis Bru</span><span class="badge steady">STEADY (+5)</span></div>
-                    <div class="player-row"><span>Philippe Calac</span><span class="badge steady">STEADY (+5)</span></div>
-                    <div class="player-row"><span>Nicolas Barrault</span><span class="badge steady">STEADY (+5)</span></div>
-                    <div class="player-row"><span>Maud Rotureau</span><span class="badge steady">STEADY (+5)</span></div>
-                    <div class="player-row"><span>Perrine Guillo</span><span class="badge steady">STEADY (+5)</span></div>
-                    <div class="player-row"><span>Adrian Kitcher</span><span class="badge steady">STEADY (+5)</span></div>
-                    <div class="player-row"><span>Benoit Lombard</span><span class="badge steady">STEADY (+4)</span></div>
-                    <div class="player-row"><span>Paul Domejean</span><span class="badge cold">COLD (+2)</span></div>
-                    <div class="player-row"><span>Frederic Saudejaud</span><span class="badge cold">COLD (+2)</span></div>
-                    <div class="player-row"><span>Paul MEIJERS</span><span class="badge cold">COLD (+2)</span></div>
-                    <div class="player-row"><span>Benoit de Saint Exupéry</span><span class="badge cold">COLD (+2)</span></div>
-                    <div class="player-row"><span>Pierre Peigney</span><span class="badge cold">COLD (+1)</span></div>
+                    <div class="player-row"><span>Johanna Wespe</span><span class="badge hot font-bold">HOT (+42)</span></div>
+                    <div class="player-row"><span>Elena Portello</span><span class="badge hot font-bold">HOT (+38)</span></div>
+                    <div class="player-row"><span>Adrian Kitcher</span><span class="badge surging">SURGING (+34)</span></div>
+                    <div class="player-row"><span>Nathalie Doliveira</span><span class="badge surging">SURGING (+34)</span></div>
+                    <div class="player-row"><span>Guillaume Odemer</span><span class="badge surging">SURGING (+33)</span></div>
+                    <div class="player-row"><span>Paul Domejean</span><span class="badge surging">SURGING (+32)</span></div>
+                    <div class="player-row"><span>Benoit Lombard</span><span class="badge surging">SURGING (+32)</span></div>
+                    <div class="player-row"><span>Julien Le Tanno</span><span class="badge steady">STEADY (+30)</span></div>
+                    <div class="player-row"><span>Philippe Calac</span><span class="badge steady">STEADY (+30)</span></div>
+                    <div class="player-row"><span>Benoit de Saint Exupéry</span><span class="badge steady">STEADY (+29)</span></div>
+                    <div class="player-row"><span>Frederic Mazel</span><span class="badge steady">STEADY (+27)</span></div>
+                    <div class="player-row"><span>Valerie Itie-Polese</span><span class="badge steady">STEADY (+25)</span></div>
+                    <div class="player-row"><span>Maylis Bru</span><span class="badge steady">STEADY (+24)</span></div>
+                    <div class="player-row"><span>Nicolas Barrault</span><span class="badge steady">STEADY (+22)</span></div>
+                    <div class="player-row"><span>Paul MEIJERS</span><span class="badge cold">COLD (+19)</span></div>
+                    <div class="player-row"><span>Perrine Guillo</span><span class="badge cold">COLD (+16)</span></div>
+                    <div class="player-row"><span>Patrick Lombard</span><span class="badge cold">COLD (+16)</span></div>
+                    <div class="player-row"><span>Frederic Saudejaud</span><span class="badge cold">COLD (+14)</span></div>
+                    <div class="player-row"><span>Maud Rotureau</span><span class="badge cold">COLD (+14)</span></div>
+                    <div class="player-row"><span>Pierre Peigney</span><span class="badge cold">COLD (+13)</span></div>
                 </div>
             </div>
 
-            <!-- FULL 20 PEOPLE CHAOS INDEX WITH INDIVIDUAL COMMENTS -->
             <div class="card">
                 <h2>Chaos Index (All 20 Managers)</h2>
                 <div class="help-text">Risk profiling and variance margins for the entire field of play.</div>
                 <div style="max-height: 940px; overflow-y: auto; padding-right: 5px;">
-                    <div class="commentary-item"><span class="commentary-name">Frederic Mazel:</span> Highly conservative variance profile, successfully holding baseline template protection.</div>
-                    <div class="commentary-item"><span class="commentary-name">Johanna Wespe:</span> Moderate-high pressure vector. Taking precise risks to dismantle the #1 spot.</div>
-                    <div class="commentary-item"><span class="commentary-name">Benoit de Saint Exupéry:</span> Volatility low but dropping due to friction from recent unpredicted match logs.</div>
-                    <div class="commentary-item"><span class="commentary-name">Philippe Calac:</span> Balanced profile. Positioned optimally to capitalize if upper seeds experience sudden drift.</div>
-                    <div class="commentary-item"><span class="commentary-name">Benoit Lombard:</span> Center of the drag race pack. High structural tie-risk with neighboring brackets.</div>
-                    <div class="commentary-item"><span class="commentary-name">Paul Domejean:</span> Low momentum variance during this segment, trailing safe parameters.</div>
-                    <div class="commentary-item"><span class="commentary-name">Julien Le Tanno:</span> Marginal Chaos Rating. Explosive surge creates severe risk deviations across the board.</div>
-                    <div class="commentary-item"><span class="commentary-name">Guillaume Odemer:</span> Safe tracking metrics. Resisting structural drops with steady defensive picks.</div>
-                    <div class="commentary-item"><span class="commentary-name">Maylis Bru:</span> Highly vulnerable to immediate differential variance within the 5-point pack.</div>
-                    <div class="commentary-item"><span class="commentary-name">Elena Portello:</span> Measured risk matrix. Perfectly poised to utilize upcoming knockouts as leverage points.</div>
-                    <div class="commentary-item"><span class="commentary-name">Nathalie Doliveira:</span> Breakaway profiling. Showing high willingness to pick unique scorelines.</div>
-                    <div class="commentary-item"><span class="commentary-name">Adrian Kitcher:</span> Flat variance curve. Relying heavily on heavy favorite margins.</div>
-                    <div class="commentary-item"><span class="commentary-name">Perrine Guillo:</span> Moderate instability. Prone to macro ranking adjustments based on clean-sheet bonuses.</div>
-                    <div class="commentary-item"><span class="commentary-name">Frederic Saudejaud:</span> Low-risk profile with minimal deviation lines, keeping back-end positions steady.</div>
-                    <div class="commentary-item"><span class="commentary-name">Nicolas Barrault:</span> Safe holding pattern, mirroring median choice lines.</div>
-                    <div class="commentary-item"><span class="commentary-name">Valerie Itie-Polese:</span> Sudden velocity warning. Drastic spike in pick efficiency increases chaos rating.</div>
-                    <div class="commentary-item"><span class="commentary-name">Pierre Peigney:</span> High risk deficit, facing compounding pressure to select heavy underdog spreads.</div>
-                    <div class="commentary-item"><span class="commentary-name">Patrick Lombard:</span> Strong tactical volatility. Capable of creating deep waves in the bottom tier.</div>
-                    <div class="commentary-item"><span class="commentary-name">Paul MEIJERS:</span> Passive strategy curve, matching template selections with minor success.</div>
-                    <div class="commentary-item"><span class="commentary-name">Maud Rotureau:</span> Extreme variance position due to wide point differential, completely isolated.</div>
+                    <div class="commentary-item"><span class="commentary-name">Frederic Mazel:</span> Protecting his lead with solid macro strategies, keeping layout errors minimal.</div>
+                    <div class="commentary-item"><span class="commentary-name">Johanna Wespe:</span> Explosive velocity round (+42) drastically shaking up front-running variance parameters.</div>
+                    <div class="commentary-item"><span class="commentary-name">Philippe Calac:</span> Sitting in a highly structured podium tier ready to leverage errors.</div>
+                    <div class="commentary-item"><span class="commentary-name">Paul Domejean:</span> Aggressive upside trajectory tracking safely with clean points distribution.</div>
+                    <div class="commentary-item"><span class="commentary-name">Benoit de Saint Exupéry:</span> Steady but facing heavy pressure from chasing variance blocks.</div>
+                    <div class="commentary-item"><span class="commentary-name">Adrian Kitcher:</span> Big round acceleration pushing him heavily into immediate elite tracking brackets.</div>
+                    <div class="commentary-item"><span class="commentary-name">Nathalie Doliveira:</span> High variance efficiency. Finding unique point differentials to advance.</div>
+                    <div class="commentary-item"><span class="commentary-name">Guillaume Odemer:</span> Safe metrics holding, avoiding structural dropouts in the pack.</div>
+                    <div class="commentary-item"><span class="commentary-name">Elena Portello:</span> Fantastic high-velocity tracking execution (+38) consolidating her place in the upper tiers!</div>
+                    <div class="commentary-item"><span class="commentary-name">Benoit Lombard:</span> Deep inside the drag race matrix with high tie-lines risk.</div>
+                    <div class="commentary-item"><span class="commentary-name">Maylis Bru:</span> Exposed to fast layout shuffles inside the compressed point windows.</div>
+                    <div class="commentary-item"><span class="commentary-name">Valerie Itie-Polese:</span> Steady midpack profiling with defensive positioning adjustments.</div>
+                    <div class="commentary-item"><span class="commentary-name">Julien Le Tanno:</span> Moderate output balancing out his variance parameters over recent games.</div>
+                    <div class="commentary-item"><span class="commentary-name">Perrine Guillo:</span> Under increased pressure to capture clean sheet underdog spreads.</div>
+                    <div class="commentary-item"><span class="commentary-name">Nicolas Barrault:</span> Safe holding pattern mirroring clean scoreline predictions.</div>
+                    <div class="commentary-item"><span class="commentary-name">Frederic Saudejaud:</span> Low volatility lines protecting lower-tier standings layout.</div>
+                    <div class="commentary-item"><span class="commentary-name">Paul MEIJERS:</span> Stable defensive configuration capturing modest score values.</div>
+                    <div class="commentary-item"><span class="commentary-name">Pierre Peigney:</span> Facing compounding risk parameters due to score gap limitations.</div>
+                    <div class="commentary-item"><span class="commentary-name">Patrick Lombard:</span> Capable of sudden turnarounds based on knockout round multipliers.</div>
+                    <div class="commentary-item"><span class="commentary-name">Maud Rotureau:</span> High statistical variance isolation at the base tier.</div>
                 </div>
             </div>
 
@@ -232,26 +223,26 @@
 
     <script>
         const leaders = [
-            { pos: 1, name: "Frederic Mazel", pts: 111, recent: 10, cat: "pos-1", label: "Leader", color: "#d97706" },
-            { pos: 2, name: "Johanna Wespe", pts: 108, recent: 10, cat: "pos-2", label: "Chaser", color: "#475569" },
-            { pos: 3, name: "Benoit de Saint Exupéry", pts: 98, recent: 2, cat: "pos-3", label: "Podium", color: "#ca8a04" },
-            { pos: 4, name: "Philippe Calac", pts: 93, recent: 5, cat: "", label: "Top Tier", color: "#1e3a8a" },
-            { pos: 5, name: "Benoit Lombard", pts: 84, recent: 4, cat: "highlight-drag", label: "Drag Race", color: "#0d9488" },
-            { pos: 6, name: "Paul Domejean", pts: 82, recent: 2, cat: "highlight-drag", label: "Drag Race", color: "#2563eb" },
-            { pos: 6, name: "Julien Le Tanno", pts: 82, recent: 18, cat: "highlight-drag", label: "Drag Race", color: "#dc2626" },
-            { pos: 8, name: "Guillaume Odemer", pts: 81, recent: 8, cat: "highlight-drag", label: "Drag Race", color: "#9333ea" },
-            { pos: 9, name: "Maylis Bru", pts: 79, recent: 5, cat: "highlight-drag", label: "Drag Race", color: "#db2777" },
-            { pos: 9, name: "Elena Portello", pts: 79, recent: 5, cat: "highlight-drag", label: "Drag Race", color: "#0f766e" },
-            { pos: 11, name: "Nathalie Doliveira", pts: 73, recent: 9, cat: "", label: "Midfield", color: "#b45309" },
-            { pos: 12, name: "Adrian Kitcher", pts: 70, recent: 5, cat: "", label: "Midfield", color: "#4d7c0f" },
-            { pos: 12, name: "Perrine Guillo", pts: 70, recent: 5, cat: "", label: "Midfield", color: "#0369a1" },
-            { pos: 14, name: "Frederic Saudejaud", pts: 69, recent: 2, cat: "", label: "Chasing Pack", color: "#6d28d9" },
-            { pos: 15, name: "Nicolas Barrault", pts: 69, recent: 5, cat: "", label: "Chasing Pack", color: "#be123c" },
-            { pos: 16, name: "Valerie Itie-Polese", pts: 65, recent: 13, cat: "", label: "Chasing Pack", color: "#e11d48" },
-            { pos: 17, name: "Pierre Peigney", pts: 62, recent: 1, cat: "", label: "Chasing Pack", color: "#52525b" },
-            { pos: 18, name: "Patrick Lombard", pts: 62, recent: 10, cat: "", label: "Chasing Pack", color: "#15803d" },
-            { pos: 19, name: "Paul MEIJERS", pts: 60, recent: 2, cat: "", label: "Chasing Pack", color: "#7c2d12" },
-            { pos: 20, name: "Maud Rotureau", pts: 30, recent: 5, cat: "", label: "Climber", color: "#a21caf" }
+            { pos: 1, name: "Frederic Mazel", pts: 222, recent: 27, cat: "pos-1", label: "Leader", color: "#d97706" },
+            { pos: 2, name: "Johanna Wespe", pts: 214, recent: 42, cat: "pos-2", label: "Chaser", color: "#475569" },
+            { pos: 3, name: "Philippe Calac", pts: 209, recent: 30, cat: "pos-3", label: "Podium", color: "#ca8a04" },
+            { pos: 4, name: "Paul Domejean", pts: 206, recent: 32, cat: "", label: "Top Tier", color: "#1e3a8a" },
+            { pos: 5, name: "Benoit de Saint Exupéry", pts: 204, recent: 29, cat: "", label: "Top Tier", color: "#2563eb" },
+            { pos: 6, name: "Adrian Kitcher", pts: 196, recent: 34, cat: "highlight-drag", label: "Drag Race", color: "#0d9488" },
+            { pos: 7, name: "Nathalie Doliveira", pts: 193, recent: 34, cat: "highlight-drag", label: "Drag Race", color: "#dc2626" },
+            { pos: 8, name: "Guillaume Odemer", pts: 189, recent: 33, cat: "highlight-drag", label: "Drag Race", color: "#9333ea" },
+            { pos: 9, name: "Elena Portello", pts: 188, recent: 38, cat: "highlight-drag", label: "Drag Race", color: "#0f766e" },
+            { pos: 10, name: "Benoit Lombard", pts: 184, recent: 32, cat: "highlight-drag", label: "Drag Race", color: "#db2777" },
+            { pos: 11, name: "Maylis Bru", pts: 176, recent: 24, cat: "highlight-drag", label: "Drag Race", color: "#b45309" },
+            { pos: 12, name: "Valerie Itie-Polese", pts: 170, recent: 25, cat: "", label: "Midfield", color: "#4d7c0f" },
+            { pos: 13, name: "Julien Le Tanno", pts: 167, recent: 30, cat: "", label: "Midfield", color: "#0369a1" },
+            { pos: 14, name: "Perrine Guillo", pts: 166, recent: 16, cat: "", label: "Midfield", color: "#6d28d9" },
+            { pos: 15, name: "Nicolas Barrault", pts: 162, recent: 22, cat: "", label: "Chasing Pack", color: "#be123c" },
+            { pos: 16, name: "Frederic Saudejaud", pts: 159, recent: 14, cat: "", label: "Chasing Pack", color: "#e11d48" },
+            { pos: 17, name: "Paul MEIJERS", pts: 154, recent: 19, cat: "", label: "Chasing Pack", color: "#52525b" },
+            { pos: 18, name: "Pierre Peigney", pts: 136, recent: 13, cat: "", label: "Chasing Pack", color: "#15803d" },
+            { pos: 19, name: "Patrick Lombard", pts: 132, recent: 16, cat: "", label: "Chasing Pack", color: "#7c2d12" },
+            { pos: 20, name: "Maud Rotureau", pts: 106, recent: 14, cat: "", label: "Climber", color: "#a21caf" }
         ];
 
         // Populate Standings Table
@@ -272,11 +263,11 @@
         const datasets = leaders.map((player) => {
             let pre48hScore = player.pts - player.recent;
             
-            // Adjust historical values so Johanna shows leading right up until the latest round
+            // Adjust specific positions to reflect accurate overtaking sequences 
             if (player.name === "Frederic Mazel") {
-                pre48hScore = 95;
+                pre48hScore = 195;
             } else if (player.name === "Johanna Wespe") {
-                pre48hScore = 98;
+                pre48hScore = 172;
             }
 
             return {
