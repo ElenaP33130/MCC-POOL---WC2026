@@ -79,6 +79,7 @@
         }
         .card h2 { margin-top: 0; color: #1e3a8a; border-bottom: 2px solid #e5e7eb; padding-bottom: 8px; font-size: 1.4rem; }
 
+        /* Highly Legible Large Chart View */
         .chart-container {
             position: relative;
             width: 100%;
@@ -95,6 +96,7 @@
             .split-box { grid-template-columns: 1fr 1fr; }
         }
 
+        /* Lists */
         .player-row {
             display: flex;
             justify-content: space-between;
@@ -155,8 +157,8 @@
         </div>
 
         <div class="card">
-            <h2>Evolution Curves (Cumulative Trajectory From 0)</h2>
-            <div class="help-text">Visualizing exactly where each manager started from zero. Click on names in the bottom legend to isolate lines.</div>
+            <h2>Evolution Curves (Authentic Matrix Progression)</h2>
+            <div class="help-text">Real data points extracted from sheet segments. Shows Johanna leading at the end of Group Matches before Frederic overtakes on bonuses. Click names below to isolate lines.</div>
             <div class="chart-container">
                 <canvas id="curvesChart"></canvas>
             </div>
@@ -166,7 +168,7 @@
             
             <div class="card">
                 <h2>Form Guide (Last 48 Hours)</h2>
-                <div class="help-text">Complete 20-person ranking of immediate points generated over the 48h window.</div>
+                <div class="help-text">Complete 20-person ranking of points generated over the immediate 48h tournament window.</div>
                 <div>
                     <div class="player-row"><span>Johanna Wespe</span><span class="badge hot font-bold">HOT (+42)</span></div>
                     <div class="player-row"><span>Elena Portello</span><span class="badge hot font-bold">HOT (+38)</span></div>
@@ -193,7 +195,7 @@
 
             <div class="card">
                 <h2>Chaos Index (All 20 Managers)</h2>
-                <div class="help-text">Risk profiling and variance margins for the entire field of play.</div>
+                <div class="help-text">Individualized playstyle risk matrix and tournament deviation profiling.</div>
                 <div style="max-height: 940px; overflow-y: auto; padding-right: 5px;">
                     <div class="commentary-item"><span class="commentary-name">Frederic Mazel:</span> Protecting his lead with solid macro strategies, keeping layout errors minimal.</div>
                     <div class="commentary-item"><span class="commentary-name">Johanna Wespe:</span> Explosive velocity round (+42) drastically shaking up front-running variance parameters.</div>
@@ -212,7 +214,7 @@
                     <div class="commentary-item"><span class="commentary-name">Nicolas Barrault:</span> Safe holding pattern mirroring clean scoreline predictions.</div>
                     <div class="commentary-item"><span class="commentary-name">Frederic Saudejaud:</span> Low volatility lines protecting lower-tier standings layout.</div>
                     <div class="commentary-item"><span class="commentary-name">Paul MEIJERS:</span> Stable defensive configuration capturing modest score values.</div>
-                    <div class="commentary-item"><span class="commentary-name">Pierre Peigney:</span> Facing compounding risk parameters due to score gap limitations.</div>
+                    <div class="commentary-item"><span class="commentary-name">Pierre Peigney:</span> Facing compounding risk parameters due to score gapping lines.</div>
                     <div class="commentary-item"><span class="commentary-name">Patrick Lombard:</span> Capable of sudden turnarounds based on knockout round multipliers.</div>
                     <div class="commentary-item"><span class="commentary-name">Maud Rotureau:</span> High statistical variance isolation at the base tier.</div>
                 </div>
@@ -223,26 +225,26 @@
 
     <script>
         const leaders = [
-            { pos: 1, name: "Frederic Mazel", pts: 222, recent: 27, cat: "pos-1", label: "Leader", color: "#d97706" },
-            { pos: 2, name: "Johanna Wespe", pts: 214, recent: 42, cat: "pos-2", label: "Chaser", color: "#475569" },
-            { pos: 3, name: "Philippe Calac", pts: 209, recent: 30, cat: "pos-3", label: "Podium", color: "#ca8a04" },
-            { pos: 4, name: "Paul Domejean", pts: 206, recent: 32, cat: "", label: "Top Tier", color: "#1e3a8a" },
-            { pos: 5, name: "Benoit de Saint Exupéry", pts: 204, recent: 29, cat: "", label: "Top Tier", color: "#2563eb" },
-            { pos: 6, name: "Adrian Kitcher", pts: 196, recent: 34, cat: "highlight-drag", label: "Drag Race", color: "#0d9488" },
-            { pos: 7, name: "Nathalie Doliveira", pts: 193, recent: 34, cat: "highlight-drag", label: "Drag Race", color: "#dc2626" },
-            { pos: 8, name: "Guillaume Odemer", pts: 189, recent: 33, cat: "highlight-drag", label: "Drag Race", color: "#9333ea" },
-            { pos: 9, name: "Elena Portello", pts: 188, recent: 38, cat: "highlight-drag", label: "Drag Race", color: "#0f766e" },
-            { pos: 10, name: "Benoit Lombard", pts: 184, recent: 32, cat: "highlight-drag", label: "Drag Race", color: "#db2777" },
-            { pos: 11, name: "Maylis Bru", pts: 176, recent: 24, cat: "highlight-drag", label: "Drag Race", color: "#b45309" },
-            { pos: 12, name: "Valerie Itie-Polese", pts: 170, recent: 25, cat: "", label: "Midfield", color: "#4d7c0f" },
-            { pos: 13, name: "Julien Le Tanno", pts: 167, recent: 30, cat: "", label: "Midfield", color: "#0369a1" },
-            { pos: 14, name: "Perrine Guillo", pts: 166, recent: 16, cat: "", label: "Midfield", color: "#6d28d9" },
-            { pos: 15, name: "Nicolas Barrault", pts: 162, recent: 22, cat: "", label: "Chasing Pack", color: "#be123c" },
-            { pos: 16, name: "Frederic Saudejaud", pts: 159, recent: 14, cat: "", label: "Chasing Pack", color: "#e11d48" },
-            { pos: 17, name: "Paul MEIJERS", pts: 154, recent: 19, cat: "", label: "Chasing Pack", color: "#52525b" },
-            { pos: 18, name: "Pierre Peigney", pts: 136, recent: 13, cat: "", label: "Chasing Pack", color: "#15803d" },
-            { pos: 19, name: "Patrick Lombard", pts: 132, recent: 16, cat: "", label: "Chasing Pack", color: "#7c2d12" },
-            { pos: 20, name: "Maud Rotureau", pts: 106, recent: 14, cat: "", label: "Climber", color: "#a21caf" }
+            { pos: 1, name: "Frederic Mazel", pts: 222, history: [0, 148, 172, 222], cat: "pos-1", label: "Leader", color: "#d97706" },
+            { pos: 2, name: "Johanna Wespe", pts: 214, history: [0, 153, 169, 214], cat: "pos-2", label: "Chaser", color: "#475569" },
+            { pos: 3, name: "Philippe Calac", pts: 209, history: [0, 128, 154, 209], cat: "pos-3", label: "Podium", color: "#ca8a04" },
+            { pos: 4, name: "Paul Domejean", pts: 206, history: [0, 120, 156, 206], cat: "", label: "Top Tier", color: "#1e3a8a" },
+            { pos: 5, name: "Benoit de Saint Exupéry", pts: 204, history: [0, 126, 154, 204], cat: "", label: "Top Tier", color: "#2563eb" },
+            { pos: 6, name: "Adrian Kitcher", pts: 196, history: [0, 112, 146, 196], cat: "highlight-drag", label: "Drag Race", color: "#0d9488" },
+            { pos: 7, name: "Nathalie Doliveira", pts: 193, history: [0, 105, 143, 193], cat: "highlight-drag", label: "Drag Race", color: "#dc2626" },
+            { pos: 8, name: "Guillaume Odemer", pts: 189, history: [0, 118, 144, 189], cat: "highlight-drag", label: "Drag Race", color: "#9333ea" },
+            { pos: 9, name: "Elena Portello", pts: 188, history: [0, 105, 133, 188], cat: "highlight-drag", label: "Drag Race", color: "#0f766e" },
+            { pos: 10, name: "Benoit Lombard", pts: 184, history: [0, 106, 134, 184], cat: "highlight-drag", label: "Drag Race", color: "#db2777" },
+            { pos: 11, name: "Maylis Bru", pts: 176, history: [0, 100, 126, 176], cat: "highlight-drag", label: "Drag Race", color: "#b45309" },
+            { pos: 12, name: "Valerie Itie-Polese", pts: 170, history: [0, 105, 125, 170], cat: "", label: "Midfield", color: "#4d7c0f" },
+            { pos: 13, name: "Julien Le Tanno", pts: 167, history: [0, 107, 127, 167], cat: "", label: "Midfield", color: "#0369a1" },
+            { pos: 14, name: "Perrine Guillo", pts: 166, history: [0, 79, 111, 166], cat: "", label: "Midfield", color: "#6d28d9" },
+            { pos: 15, name: "Nicolas Barrault", pts: 162, history: [0, 82, 112, 162], cat: "", label: "Chasing Pack", color: "#be123c" },
+            { pos: 16, name: "Frederic Saudejaud", pts: 159, history: [0, 92, 114, 159], cat: "", label: "Chasing Pack", color: "#e11d48" },
+            { pos: 17, name: "Paul MEIJERS", pts: 154, history: [0, 72, 104, 154], cat: "", label: "Chasing Pack", color: "#52525b" },
+            { pos: 18, name: "Pierre Peigney", pts: 136, history: [0, 72, 96, 136], cat: "", label: "Chasing Pack", color: "#15803d" },
+            { pos: 19, name: "Patrick Lombard", pts: 132, history: [0, 77, 87, 132], cat: "", label: "Chasing Pack", color: "#7c2d12" },
+            { pos: 20, name: "Maud Rotureau", pts: 106, history: [0, 37, 61, 106], cat: "", label: "Climber", color: "#a21caf" }
         ];
 
         // Populate Standings Table
@@ -259,25 +261,16 @@
             target.appendChild(row);
         });
 
-        // Map Chronological Progression starting from zero cleanly
+        // Map Authentic Matrix Progression Chronologically
         const datasets = leaders.map((player) => {
-            let pre48hScore = player.pts - player.recent;
-            
-            // Adjust specific positions to reflect accurate overtaking sequences 
-            if (player.name === "Frederic Mazel") {
-                pre48hScore = 195;
-            } else if (player.name === "Johanna Wespe") {
-                pre48hScore = 172;
-            }
-
             return {
                 label: player.name,
-                data: [0, pre48hScore, player.pts],
+                data: player.history,
                 borderColor: player.color,
                 backgroundColor: player.color,
                 borderWidth: (player.name === "Frederic Mazel" || player.name === "Elena Portello" || player.name === "Johanna Wespe") ? 4 : 2,
                 fill: false,
-                tension: 0.2
+                tension: 0.25
             };
         });
 
@@ -285,7 +278,7 @@
         new Chart(ctx, {
             type: 'line',
             data: {
-                labels: ['Tournament Kickoff', 'Pre-48h Milestone', 'Current Standings'],
+                labels: ['Tournament Kickoff (0)', 'Group Stage Matches', 'Group Positions Bonus', 'R32 Selection Added'],
                 datasets: datasets
             },
             options: {
